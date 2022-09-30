@@ -1,63 +1,61 @@
 const react = require('react')
 const xlsxFile = require('read-excel-file/node');
+const fs = require('fs');
 
- 
-// xlsxFile('./excel/BFD.xlsx', { getSheets: true }).then((sheets) => {
-//     sheets.forEach((obj)=>{
-     
-//          console.log(obj.name);
-//      })
-// })
 
-// xlsxFile('./excel/BFD.xlsx', { sheet: A }).then((rows) => {
-// for (i in rows){
-//         for (j in rows[i]){
-//             console.log(rows[i][j]);
-//         }
-//     }
-// })
-const concatLists = () => {
-    // const [B, setB] = react.useState([]);
-    // const [F, setF] = react.useState([]);
-    // const [D, setD] = react.useState([]);
-    let B = [];
-    let F = [];
-    let D = [];
+const concatLists = async () => {
 
-    let concatArray = [];
-
-    xlsxFile('./excel/BFD.xlsx', { sheet: 'B' }).then((rows) => {
+    const B = xlsxFile('./excel/BFD.xlsx', { sheet: 'B' }).then((rows) => {
         let array = []
         for (i in rows){
             array.push(rows[i][0])
             }
 
         let uniqueArray = [...new Set(array)]
-        B = uniqueArray
-        console.dir(B, {'maxArrayLength': null})
+        // B = uniqueArray
+        console.dir(uniqueArray, {'maxArrayLength': null})
+        return uniqueArray
     })
 
-    xlsxFile('./excel/BFD.xlsx', { sheet: 'F' }).then((rows) => {
+    const F = xlsxFile('./excel/BFD.xlsx', { sheet: 'F' }).then((rows) => {
         let array = []
         for (i in rows){
             array.push(rows[i][0])
             }
 
         let uniqueArray = [...new Set(array)]
-        F = uniqueArray
-        console.dir(F, {'maxArrayLength': null})
+        // F = uniqueArray
+        console.dir(uniqueArray, {'maxArrayLength': null})
+        return uniqueArray
     })
 
-    xlsxFile('./excel/BFD.xlsx', { sheet: 'D' }).then((rows) => {
+    const D = xlsxFile('./excel/BFD.xlsx', { sheet: 'D' }).then((rows) => {
         let array = []
         for (i in rows){
             array.push(rows[i][0])
             }
 
         let uniqueArray = [...new Set(array)]
-        D = uniqueArray
-        console.dir(D, {'maxArrayLength': null})
+        // D = uniqueArray
+        console.dir(uniqueArray, {'maxArrayLength': null})
+        return uniqueArray
     })
+
+    // const readExcelB = await {"B": B};
+    // const readExcelF = await {"F": F};
+    // const readExcelD = await {"D": D};
+
+
+    // // // convert JSON object to string
+    // const data = await JSON.stringify(readExcelB, readExcelF, readExcelD);
+
+    // // write JSON string to a file
+    // fs.writeFile('concatList.json', data, (err) => {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     console.log("JSON data is saved.");
+    // });
 
 }
 
